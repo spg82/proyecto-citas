@@ -22,9 +22,9 @@ Route::get('/contacto',function(){
 
 Route::get('/admin',function(){
     return view('admin.index');
-});
+})->middleware(['auth','admin'])->name('admin');
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth','cliente'])->name('dashboard');
 
 require __DIR__.'/auth.php';
