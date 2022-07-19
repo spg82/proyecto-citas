@@ -24,6 +24,8 @@
     @include('layouts.menu')
     <div class="container" style="min-height: 700px">
         @section('contenido')
+        @show
+        
     </div>
 
    
