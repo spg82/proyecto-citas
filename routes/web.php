@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,5 +27,7 @@ Route::get('/admin',function(){
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','cliente'])->name('dashboard');
+
+Route::get('/perfil',[PerfilController::class,'index']);
 
 require __DIR__.'/auth.php';

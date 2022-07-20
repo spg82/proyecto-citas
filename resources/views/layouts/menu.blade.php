@@ -6,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse d-flex justify-content-between align-items-end" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav w-75">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
@@ -16,15 +16,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="contacto">Contacto</a>
                 </li>
-                <li>
-                    @auth
+
+                @auth
                     @if (Auth::user()->role === 'admin')
-                        <a href="{{ url('/admin') }}" class="nav-link">Admin</a>
+                        
+                        <li class="nav-item">
+                            <a href="{{ url('/perfil') }}" class="nav-link">Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/admin') }}" class="nav-link">Admin</a>
+                        </li>
                     @else
-                        <a href="{{ url('/dashboard') }}" class="nav-link">Dashboard</a>
+                        
+                        <li class="nav-item">
+                            <a href="{{ url('/perfil') }}" class="nav-link">Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/dashboard') }}" class="nav-link">Cliente</a>
+                        </li>
                     @endif
-                    @endauth
-                </li>
+
+                @endauth
+
             </ul>
             @if (Route::has('login'))
                 <div class="">
