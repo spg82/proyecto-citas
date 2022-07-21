@@ -28,6 +28,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','cliente'])->name('dashboard');
 
-Route::get('/perfil',[PerfilController::class,'index']);
+Route::get('/perfil',[PerfilController::class,'index'])->name('perfil');
 
 require __DIR__.'/auth.php';
