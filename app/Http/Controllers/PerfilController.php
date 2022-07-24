@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Perfil;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class PerfilController extends Controller
        
 
        
-       return view('perfil',compact('usuario'));
+       return view('perfil.index',compact('usuario'));
 
         
     }
@@ -39,6 +40,7 @@ class PerfilController extends Controller
     public function create()
     {
         //
+        return view('perfil.create');
     }
 
     /**
@@ -49,7 +51,26 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //limpiar errores
+        $errors = [];
+        //Validación
+        $validado = $request->validate([
+            'apellido1' => 'required|string|max:255',
+            'apellido2' => 'required|string|max:255',
+            'telefono'=> 'required|min:9|max:9|integer',
+            'imagen'=> 'required|mimes:jpg,png'
+        ]);
+        if ($validado) {
+            $perfil = new Perfil();
+            $perfil->apellido1 = $request->apellido1;
+            $perfil->apellido2 = $request->apellido2;
+            $perfil->telefono = $request->telefono;
+            $perfil->imagen = $request->imagen;
+            $perfil->save();
+            return redirect()->action([PerfilController::class, 'index']);
+        } else {
+            return back()->withInput();
+        }
     }
 
     /**

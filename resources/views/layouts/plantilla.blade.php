@@ -10,6 +10,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
 
     <!-- Styles -->
 
@@ -23,7 +24,11 @@
 
     <style>
         a.dropdown-toggle::after{
-            margin-left: 2.2em;
+            margin-left: 1em;
+        }
+        i{
+            font-size: 1.2em;
+            color:aquamarine;
         }
     </style>
 </head>
