@@ -19,7 +19,7 @@
 
                 @auth
                     <li class="nav-item">
-                        <a href="{{ url('/perfil') }}" class="nav-link">Perfil</a>
+                        <a href="{{ route('perfil.index') }}" class="nav-link">Perfil</a>
                     </li>
                     @if (Auth::user()->role === 'admin')
                         <li class="nav-item">

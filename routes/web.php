@@ -30,6 +30,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/perfil',[PerfilController::class,'index'])->name('perfil.index');
 Route::get('/perfil/create',[PerfilController::class,'create'])->name('perfil.crear');
-Route::get('/perfil/create',[PerfilController::class,'store'])->name('perfil.store');
+Route::get('/perfil/store',[PerfilController::class,'store'])->name('perfil.store');
 
 require __DIR__.'/auth.php';
