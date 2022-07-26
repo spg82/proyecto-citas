@@ -27,9 +27,17 @@ Route::get('/admin',function(){
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth','cliente'])->name('dashboard');
+/**
+ * Rutas del Perfil
+ */
 
-Route::get('/perfil',[PerfilController::class,'index'])->name('perfil.index');
-Route::get('/perfil/create',[PerfilController::class,'create'])->name('perfil.crear');
-Route::get('/perfil/store',[PerfilController::class,'store'])->name('perfil.store');
+Route::get('perfil',[PerfilController::class,'index'])->name('perfil.index');
+Route::get('perfil/create/{id}',[PerfilController::class,'create'])->name('perfil.crear');
+Route::post('perfil/create/{id}',[PerfilController::class,'store'])->name('perfil.store');
+Route::get('perfil/editar/{id}',[PerfilController::class,'edit'])->name('perfil.edit');
+Route::post('perfil/editar/{id}',[PerfilController::class,'update'])->name('perfil.update');
+Route::get('perfil/eliminar/{id}',[PerfilControllerr::class,'destroy'])->name('perfil.destroy');
+
+
 
 require __DIR__.'/auth.php';

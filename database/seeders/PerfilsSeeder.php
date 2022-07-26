@@ -61,7 +61,7 @@ class PerfilsSeeder extends Seeder
 
         ]);
         DB::table('perfils')->insert([
-            'user_id' => 5,
+            'user_id' => 6,
             'apellido1' => 'Sánchez',
             'apellido2' => 'Rodríguez',
             'telefono' => 654512114,
