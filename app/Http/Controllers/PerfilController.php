@@ -132,7 +132,7 @@ class PerfilController extends Controller
                 $imagen->move($ruta, $nombreImagen);
                 $perfil->imagen = $nombreImagen;
             }else{
-                if(!$request->imagen_old === ""){
+                if($request->imagen_old === ""){
                     $perfil->imagen = $request->imagen_old;
                 }
                 
