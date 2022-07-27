@@ -36,7 +36,7 @@ Route::get('perfil/create/{id}',[PerfilController::class,'create'])->name('perfi
 Route::post('perfil/create/{id}',[PerfilController::class,'store'])->name('perfil.store');
 Route::get('perfil/editar/{id}',[PerfilController::class,'edit'])->name('perfil.edit');
 Route::post('perfil/editar/{id}',[PerfilController::class,'update'])->name('perfil.update');
-Route::get('perfil/eliminar/{id}',[PerfilControllerr::class,'destroy'])->name('perfil.destroy');
+Route::get('perfil/eliminar/{id}',[PerfilController::class,'destroy'])->name('perfil.destroy');
 
 
 

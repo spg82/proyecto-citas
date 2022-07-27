@@ -46,8 +46,12 @@
                                 aria-expanded="false">
 
                                 @if (isset(Auth::user()->perfil->imagen))
-                                    <img src="{{ asset('img/user/' . Auth::user()->perfil->imagen) }}" alt=""
-                                        width="70px" class="rounded-circle">
+                                    @if (Auth::user()->perfil->imagen === '')
+                                        <i class="fa-solid fa-user"></i>
+                                    @else
+                                        <img src="{{ asset('img/user/' . Auth::user()->perfil->imagen) }}" alt=""
+                                            width="70px" class="rounded-circle">
+                                    @endif
                                 @else
                                     <i class="fa-solid fa-user"></i>
                                 @endif

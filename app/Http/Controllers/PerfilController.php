@@ -6,7 +6,7 @@ use App\Models\Perfil;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 //use App\Models\Perfil;
 
 class PerfilController extends Controller
@@ -28,7 +28,7 @@ class PerfilController extends Controller
 
 
 
-        return view('perfil.index', compact('usuario' , 'user','id'));
+        return view('perfil.index', compact('usuario', 'user', 'id'));
     }
 
     /**
@@ -50,46 +50,40 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-        print $request->file('imagen');
+       // dd($request);
         //limpiar errores
         $errors = [];
         //Validación todavía hay que hacer que funcione telefono min y max
         $validado = $request->validate([
             'apellido1' => 'required|string|max:255',
             'apellido2' => 'required|string|max:255',
-            'telefono' => 'required|integer|min:8',
-            'imagen' => 'required|mimes:jpg,png,jpeg'
+            'telefono' => 'required|integer|min:9',
+            'imagen' => 'mimes:jpg,png,jpeg'
         ]);
+
         if ($validado) {
-        
-        if ($request->hasFile('imagen')) {
-            $destinationPath = 'public/img/user/';
-            $fileName = Auth::user()->name.'.'.$request->file('imagen')->getMimeType();
-            // Mover o ficheiro cun novo nome:
-            $request->file('imagen')->move($destinationPath, $fileName);
-        }
+            $nombre = Auth::user()->name;
+            $id = Auth::user()->id;
             $perfil = new Perfil();
+            if ($request->hasFile('imagen')) {
+                $imagen = $request->file('imagen');
+                $nombreImagen = Str::slug($nombre . $id) . "." . $imagen->guessExtension();
+                $ruta = public_path('img/user/');
+                $imagen->move($ruta, $nombreImagen);
+                $perfil->imagen = $nombreImagen;
+            }else{
+                $perfil->imagen = "";
+            }
+
             $perfil->apellido1 = $request->apellido1;
             $perfil->apellido2 = $request->apellido2;
             $perfil->telefono = $request->telefono;
-            $perfil->imagen = Auth::user()->name.'.'.$request->file('imagen')->getMimeType();
             $perfil->user_id = $request->user_id;
             $perfil->save();
             return redirect()->action([PerfilController::class, 'index']);
         } else {
             return back()->withInput();
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -100,9 +94,9 @@ class PerfilController extends Controller
      */
     public function edit($id)
     {
-        $id = Auth::user()->id;
-        $usuario = User::find($id)->perfil;
-        return view('perfil.update', compact('usuario', 'id'));
+        $user_id = Auth::user()->id;
+        $perfil = Perfil::find($id);
+        return view('perfil.update', compact('perfil', 'id'));
     }
 
     /**
@@ -120,15 +114,29 @@ class PerfilController extends Controller
         $validado = $request->validate([
             'apellido1' => 'required|string|max:255',
             'apellido2' => 'required|string|max:255',
-            'telefono' => 'required|min:9|max:9|integer',
-            'imagen' => 'required|mimes:jpg,png'
+            'telefono' => 'required|integer|min:9',
+            'imagen' => 'mimes:jpg,png'
         ]);
         if ($validado) {
-            $perfil = new Perfil();
+            $nombre = Auth::user()->name;
+            $user_id = Auth::user()->id;
+            $perfil =  Perfil::findOrFail($id);
             $perfil->apellido1 = $request->apellido1;
             $perfil->apellido2 = $request->apellido2;
             $perfil->telefono = $request->telefono;
-            $perfil->imagen = $request->imagen;
+            $perfil->user_id = $user_id;
+            if ($request->hasFile('imagen')) {
+                $imagen = $request->file('imagen');
+                $nombreImagen = Str::slug($nombre . $user_id) . "." . $imagen->guessExtension();
+                $ruta = public_path('img/user/');
+                $imagen->move($ruta, $nombreImagen);
+                $perfil->imagen = $nombreImagen;
+            }else{
+                if(!$request->imagen_old === ""){
+                    $perfil->imagen = $request->imagen_old;
+                }
+                
+            }
             $perfil->save();
             session(['aviso' => 'El perfil fue actualizado.']);
             return redirect()->action([PerfilController::class, 'index']);

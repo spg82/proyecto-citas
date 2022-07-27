@@ -29,16 +29,22 @@
             </tr>
             <tr>
                 <td>Imagen: </td>
+                @if($usuario->imagen !== "")
                 <td><img src="{{ asset('img/user/' . $usuario->imagen) }}" alt="imagen de usuario {{ Auth::user()->name }}"
                         class="rounded-circle" width="80px"></td>
+                    @else
+                    <td>
+                        <i class="fa-solid fa-user mt-2 mb-2" style="font-size: 60px"></i>
+                    </td>
+                    @endif
             </tr>
 
             <tr>
                 <td>
-                    <a href="{{ route('perfil.edit',['id' => $usuario->user_id] )}}">Actualizar</a>
+                    <a href="{{ route('perfil.edit', ['id'=> $usuario->id] )}}" class="btn btn-success ">Actualizar</a>
                 </td>
                 <td>
-                    <a href="{{ route('perfil.destroy',['id' => $usuario->user_id]) }}">Borrar</a>
+                    <a href="{{ route('perfil.destroy', ['id' => $usuario->id]) }}" class="btn btn-danger ">Borrar</a>
                 </td>
             </tr>
         </table>
