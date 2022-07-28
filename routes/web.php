@@ -43,5 +43,6 @@ Route::get('perfil/eliminar/{id}',[PerfilController::class,'destroy'])->name('pe
  * Rutas servicios
  */
 Route::get('servicios', [ServicioController::class,'index'])->name('servicios');
+Route::get('servicios/show/{$id}', [ServicioController::class,'show'])->name('servicios.show');
 
 require __DIR__.'/auth.php';

@@ -23,12 +23,12 @@ class PerfilController extends Controller
          */
 
         $id = Auth::user()->id;
-        $user = User::find($id);
-        $usuario = User::find($id)->perfil;
+       // $user = User::find($id);
+       // $usuario = User::find($id)->perfil;
+        $usuario = User::find($id);
 
 
-
-        return view('perfil.index', compact('usuario', 'user', 'id'));
+        return view('perfil.index', compact('usuario'));
     }
 
     /**
@@ -38,7 +38,7 @@ class PerfilController extends Controller
      */
     public function create($id)
     {
-        //
+        
         return view('perfil.create', compact('id'));
     }
 
@@ -62,12 +62,12 @@ class PerfilController extends Controller
         ]);
 
         if ($validado) {
-            $nombre = Auth::user()->name;
-            $id = Auth::user()->id;
+            $id = $request->user_id;
+            $user = User::find($id);
             $perfil = new Perfil();
             if ($request->hasFile('imagen')) {
                 $imagen = $request->file('imagen');
-                $nombreImagen = Str::slug($nombre . $id) . "." . $imagen->guessExtension();
+                $nombreImagen = Str::slug($user->name . $id) . "." . $imagen->guessExtension();
                 $ruta = public_path('img/user/');
                 $imagen->move($ruta, $nombreImagen);
                 $perfil->imagen = $nombreImagen;
@@ -79,7 +79,7 @@ class PerfilController extends Controller
             $perfil->apellido2 = $request->apellido2;
             $perfil->telefono = $request->telefono;
             $perfil->user_id = $request->user_id;
-            $perfil->save();
+            $user->perfil()->save($perfil);
             return redirect()->action([PerfilController::class, 'index']);
         } else {
             return back()->withInput();
@@ -94,9 +94,8 @@ class PerfilController extends Controller
      */
     public function edit($id)
     {
-        $user_id = Auth::user()->id;
-        $perfil = Perfil::find($id);
-        return view('perfil.update', compact('perfil', 'id'));
+        $user = User::find($id);
+        return view('perfil.update', compact('user'));
     }
 
     /**
@@ -114,20 +113,20 @@ class PerfilController extends Controller
         $validado = $request->validate([
             'apellido1' => 'required|string|max:255',
             'apellido2' => 'required|string|max:255',
-            'telefono' => 'required|digits_between:2,5',
+            'telefono' => 'required|digits_between:9,9',
             'imagen' => 'mimes:jpg,png'
         ]);
         if ($validado) {
-            $nombre = Auth::user()->name;
-            $user_id = Auth::user()->id;
-            $perfil =  Perfil::findOrFail($id);
+            
+            $user = User::find($id);
+            $perfil =  Perfil::findOrFail($user->perfil->id);
             $perfil->apellido1 = $request->apellido1;
             $perfil->apellido2 = $request->apellido2;
             $perfil->telefono = $request->telefono;
-            $perfil->user_id = $user_id;
+            $perfil->user_id = $user->id;
             if ($request->hasFile('imagen')) {
                 $imagen = $request->file('imagen');
-                $nombreImagen = Str::slug($nombre . $user_id) . "." . $imagen->guessExtension();
+                $nombreImagen = Str::slug($user->name . $user->id) . "." . $imagen->guessExtension();
                 $ruta = public_path('img/user/');
                 $imagen->move($ruta, $nombreImagen);
                 $perfil->imagen = $nombreImagen;
@@ -152,7 +151,8 @@ class PerfilController extends Controller
      */
     public function destroy($id)
     {
-        $perfil = Perfil::findOrFail($id);
+        $user= User::find($id);
+        $perfil = Perfil::findOrFail($user->perfil->id);
         /*
             eliminando imagen de la carpeta, si existe
          */

@@ -49,7 +49,9 @@ class ServicioController extends Controller
      */
     public function show($id)
     {
-        //
+       
+        //$servicio = Servicio::find($id);
+        return view('servicios.show');
     }
 
     /**

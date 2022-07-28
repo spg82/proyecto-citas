@@ -16,30 +16,30 @@
 </div>
 @endif
 
-    <form action="{{ route('perfil.update', ['id' => $id]) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('perfil.update', ['id' => $user->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="imagen_old" value="{{$perfil->imagen}}">
+        <input type="hidden" name="imagen_old" value="{{$user->perfil->imagen}}">
         <div class="mb-3">
             <label for="" class="form-label">Apellido paterno: </label>
             <input type="text" class="form-control" placeholder="Pon tu apellido paterno" name="apellido1"
-                value="{{ old('apellido1', $perfil->apellido1) }}">
+                value="{{ old('apellido1', $user->perfil->apellido1) }}">
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Apellido materno: </label>
             <input type="text" class="form-control" placeholder="Pon tu apellido materno" name="apellido2"
-                value="{{ old('apellido2', $perfil->apellido2) }}">
+                value="{{ old('apellido2', $user->perfil->apellido2) }}">
         </div>
 
         <div class="mb-3">
             <label for="" class="form-label">Fijo o Móvil: </label>
             <input type="text" class="form-control" placeholder="Pon tu número de teléfono o móvil" name="telefono"
-                value="{{ old('telefono', $perfil->telefono) }}">
+                value="{{ old('telefono', $user->perfil->telefono) }}">
         </div>
         
         <div class="mb-3">
             <label for="" class="form-label">Imagen: </label>
             <input type="file" class="form-control" name="imagen" id="imagen"
-                placeholder="Introduce tu imagen de perfil" value="{{ old('imagen',$perfil->imagen) }}">
+                placeholder="Introduce tu imagen de perfil" value="{{ old('imagen',$user->perfil->imagen) }}">
         </div>
         
         <input type="submit" class="btn btn-success text-success" value="Actualizar">

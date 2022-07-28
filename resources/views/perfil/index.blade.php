@@ -4,34 +4,37 @@
     <br>
     <br>
     @if (session('aviso') !== null && session('aviso') !== '')
+    <div class="alert alert-info">
         <h1>
             {{ session('aviso') }}
             {{ session(['aviso' => '']) }}
         </h1>
+    </div>
+        
     @endif
     @if (isset(Auth::user()->perfil))
         <table class="mx-auto">
             <tr>
                 <td>Nombre: </td>
-                <td>{{ $user->name}}</td>
+                <td>{{ $usuario->name}}</td>
             </tr>
             <tr>
                 <td>Apellidos: </td>
-                <td>{{ $usuario->apellido1 . ' ' . $usuario->apellido2 }}</td>
+                <td>{{ $usuario->perfil->apellido1 . ' ' . $usuario->perfil->apellido2 }}</td>
             </tr>
             <tr>
                 <td>Email: </td>
-                <td>{{ $user->email }}</td>
+                <td>{{ $usuario->email }}</td>
             </tr>
             <tr>
                 <td>Teléfono: </td>
-                <td>{{ $usuario->telefono }}</td>
+                <td>{{ $usuario->perfil->telefono }}</td>
             </tr>
             <tr>
                 <td>Imagen: </td>
-                @if($usuario->imagen !== "")
-                <td><img src="{{ asset('img/user/' . $usuario->imagen) }}" alt="imagen de usuario {{ Auth::user()->name }}"
-                        class="rounded-circle" width="80px"></td>
+                @if($usuario->perfil->imagen !== "")
+                <td><img src="{{ asset('img/user/' . $usuario->perfil->imagen) }}" alt="imagen de usuario {{ $usuario->name }}"
+                        class="rounded-circle  mt-2 mb-2" width="80px"></td>
                     @else
                     <td>
                         <i class="fa-solid fa-user mt-2 mb-2" style="font-size: 60px"></i>
@@ -49,6 +52,6 @@
             </tr>
         </table>
     @else
-        <a href="{{ route('perfil.crear', ['id'=> $id]) }}">Crear perfil</a>
+        <a href="{{ route('perfil.crear', ['id'=> $usuario->id]) }}" class="btn btn-success">Crear perfil</a>
     @endif
 @endsection
