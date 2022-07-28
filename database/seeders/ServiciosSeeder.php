@@ -18,7 +18,7 @@ class ServiciosSeeder extends Seeder
         DB::table('servicios')->insert([
             'especialidad_id' => 1,
             'nombre' => 'Peinado',
-            'descripcion' => 'Es una forma de arreglarse el cabello, que puede ser tando liso, ondulado o rizado',
+            'descripcion' => 'Dar forma al cabello.Puede ser tando: liso, ondulado o rizado',
             'duracion' => 30,
             'precio' => '11',
             'imagen'=> 'peinado.jpeg'

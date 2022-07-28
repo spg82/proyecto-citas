@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,9 @@ Route::get('perfil/editar/{id}',[PerfilController::class,'edit'])->name('perfil.
 Route::post('perfil/editar/{id}',[PerfilController::class,'update'])->name('perfil.update');
 Route::get('perfil/eliminar/{id}',[PerfilController::class,'destroy'])->name('perfil.destroy');
 
-
+/**
+ * Rutas servicios
+ */
+Route::get('servicios', [ServicioController::class,'index'])->name('servicios');
 
 require __DIR__.'/auth.php';

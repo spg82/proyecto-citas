@@ -50,14 +50,14 @@ class PerfilController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request);
+        // dd($request);
         //limpiar errores
         $errors = [];
         //Validación todavía hay que hacer que funcione telefono min y max
         $validado = $request->validate([
             'apellido1' => 'required|string|max:255',
             'apellido2' => 'required|string|max:255',
-            'telefono' => 'required|integer|min:9',
+            'telefono' => 'required|digits_between:9,9',
             'imagen' => 'mimes:jpg,png,jpeg'
         ]);
 
@@ -71,7 +71,7 @@ class PerfilController extends Controller
                 $ruta = public_path('img/user/');
                 $imagen->move($ruta, $nombreImagen);
                 $perfil->imagen = $nombreImagen;
-            }else{
+            } else {
                 $perfil->imagen = "";
             }
 
@@ -114,7 +114,7 @@ class PerfilController extends Controller
         $validado = $request->validate([
             'apellido1' => 'required|string|max:255',
             'apellido2' => 'required|string|max:255',
-            'telefono' => 'required|integer|min:9',
+            'telefono' => 'required|digits_between:2,5',
             'imagen' => 'mimes:jpg,png'
         ]);
         if ($validado) {
@@ -131,11 +131,10 @@ class PerfilController extends Controller
                 $ruta = public_path('img/user/');
                 $imagen->move($ruta, $nombreImagen);
                 $perfil->imagen = $nombreImagen;
-            }else{
-                if($request->imagen_old === ""){
+            } else {
+                if ($request->imagen_old === "") {
                     $perfil->imagen = $request->imagen_old;
                 }
-                
             }
             $perfil->save();
             session(['aviso' => 'El perfil fue actualizado.']);
@@ -154,6 +153,16 @@ class PerfilController extends Controller
     public function destroy($id)
     {
         $perfil = Perfil::findOrFail($id);
+        /*
+            eliminando imagen de la carpeta, si existe
+         */
+        $image_path = public_path('img/user/') . $perfil->imagen;
+        if (@getimagesize($image_path)) {
+            unlink($image_path);
+        }
+        /* 
+            eliminando perfil 
+        */
         $perfil->delete();
         session(['aviso' => 'El perfil fue eliminado.']);
         return redirect()->action([PerfilController::class, 'index']);
