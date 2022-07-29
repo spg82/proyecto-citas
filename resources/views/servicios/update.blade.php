@@ -43,7 +43,7 @@
 
             <label for="form-label">Descripción</label>
             <textarea class="form-control" placeholder="Describe el servicio a crear" id="descripcion" rows="5"
-                name="descripción" value="{{ old('descripcion', $servicio->descripcion) }}"></textarea>
+                name="descripción" value="{{ old('descripcion', $servicio->descripcion) }}">{{ old('descripcion', $servicio->descripcion) }}</textarea>
 
 
         </div>
@@ -51,7 +51,7 @@
         <div class="mb-3">
             <label for="" class="form-label">Duración: </label>
             <input type="text" class="form-control" placeholder="Escribe el tiempo que dura el servicio"
-                name="duracion" value="{{ old('duracion' , $servicio->duración) }}">
+                name="duracion" value="{{ old('duracion' , $servicio->duracion) }}">
         </div>
         <div class="mb-3">
             <label for="" class="form-label">Precio: </label>
