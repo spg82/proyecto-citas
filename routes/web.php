@@ -43,6 +43,12 @@ Route::get('perfil/eliminar/{id}',[PerfilController::class,'destroy'])->name('pe
  * Rutas servicios
  */
 Route::get('servicios', [ServicioController::class,'index'])->name('servicios');
-Route::get('servicios/show/{$id}', [ServicioController::class,'show'])->name('servicios.show');
+Route::get('admin/servicios/show/{id}', [ServicioController::class,'show'])->name('servicios.show');
+Route::get('admin/servicios/create',[ServicioController::class, 'create'])->name('servicios.create');
+Route::post('admin/servicios/create',[ServicioController::class, 'create'])->name('servicios.store');
+Route::get('admin/servicios/editar/{id}',[ServicioController::class,'edit'])->name('servicios.edit');
+Route::post('admin/servicios/editar/{id}',[ServicioController::class,'update'])->name('servicios.update');
+Route::get('admin/servicios/eliminar/{id}',[ServicioController::class,'destroy'])->name('servicios.destroy');
+
 
 require __DIR__.'/auth.php';

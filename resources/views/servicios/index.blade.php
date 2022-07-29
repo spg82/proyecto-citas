@@ -1,37 +1,39 @@
 @extends('layouts.plantilla')
-@section('title', 'Servicios en Cut & Dry')
+@section('title', 'Ver los servicios')
 @section('contenido')
+    @if (session('aviso') !== null && session('aviso') !== '')
+        <div class="alert alert-info">
+            <h2>
+                {{ session('aviso') }}
+                {{ session(['aviso' => '']) }}
+            </h2>
+        </div>
+    @endif
+    <h1 class="h3 mt-2 pt-2 mb-2 pb-2 text-center">Servicios de Peluquería</h1>
+    <div class="row">
+        @foreach ($servicios as $servicio)
+            @if ($servicio->especialidad->nombre === 'Peluquería')
+                <div class="card col-4 align-items-center justify-content-center mx-auto" style=" ">
+                    <img src="{{ asset('img/servicios/' . $servicio->imagen) }}" class="card-img-top mt-2 rounded"
+                        alt="Imagen de un {{ $servicio->nombre }}">
+                    <div class="card-body">
+                        <h5 class="card-title h5">{{ $servicio->nombre }}</h5>
+                        <p class="card-text"><strong>Descripción: </strong>{{ $servicio->descripcion }}</p>
+                        <p class="card-text"><strong>Duración: </strong>{{ $servicio->duracion }} minutos.</p>
+                        <p class="card-text"><strong>Precio: </strong>{{ $servicio->precio }} €.</p>
+                        @auth
+                            @if (Auth::user()->role === 'admin')
+                                <a href="{{ route('servicios.show', ['id' => $servicio->id]) }}"
+                                    class="mt-3 mb-3 btn btn-primary">Ver</a>
+                            @endif
+                        @endauth
 
-    <h1>Servicios de Peluquería</h1>
-    @foreach ($servicios as $servicio)
-        @if ($servicio->especialidad->nombre === 'Peluquería')
-            <div class="card" style="width: 18rem;">
-                <img src="{{ asset('img/servicios/'.$servicio->imagen) }}" class="card-img-top" alt="Imagen de un {{$servicio->nombre}}".>
-                <div class="card-body">
-                    <h5 class="card-title">{{ $servicio->nombre }}</h5>
-                    <p class="card-text">{{ $servicio->descripcion }}</p>
-                    <p class="card-text">{{ $servicio->duracion }} minutos.</p>
-                    <p class="card-text">{{ $servicio->precio }} €uros.</p>
-                    
-                    <a href="{{url('servicios/show/'.$servicio->id)}}">Ver servicio</a>
-                </div>
-            </div>
-        @endif
-    @endforeach
 
-    <h1>Servicios de Estética</h1>
-    @foreach ($servicios as $servicio)
-        @if ($servicio->especialidad->nombre === 'Estética')
-            <div class="card" style="width: 18rem;">
-                <img src="{{ asset('img/servicios/'.$servicio->imagen) }}" class="card-img-top" alt="Imagen de un {{$servicio->nombre}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ $servicio->nombre }}</h5>
-                    <p class="card-text">{{ $servicio->descripcion }}</p>
-                    <p class="card-text">{{ $servicio->duracion }}</p>
-                    <p class="card-text">{{ $servicio->precio }}</p>
-                    <a href="{{ route('visualizarServicio',['id' => $servicio->id]) }}" class="btn btn-primary"> Ver servicio</a>
+
+                    </div>
                 </div>
-            </div>
-        @endif
-    @endforeach
+            @endif
+        @endforeach
+    </div>
+
 @endsection

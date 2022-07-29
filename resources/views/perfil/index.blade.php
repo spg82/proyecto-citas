@@ -1,5 +1,5 @@
 @extends('layouts.plantilla')
-
+@section('title', 'Ver perfil')
 @section('contenido')
     <br>
     <br>

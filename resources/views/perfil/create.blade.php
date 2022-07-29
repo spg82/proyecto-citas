@@ -1,5 +1,5 @@
 @extends('layouts.plantilla')
-@section('title', 'Perfil')
+@section('title', 'Crear perfil')
 
 @section('contenido')
     @if ($errors->any())

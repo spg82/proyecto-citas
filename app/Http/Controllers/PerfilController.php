@@ -80,6 +80,7 @@ class PerfilController extends Controller
             $perfil->telefono = $request->telefono;
             $perfil->user_id = $request->user_id;
             $user->perfil()->save($perfil);
+            session(['aviso' => 'El perfil fue creado.']);
             return redirect()->action([PerfilController::class, 'index']);
         } else {
             return back()->withInput();

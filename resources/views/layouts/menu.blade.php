@@ -22,9 +22,18 @@
                         <a href="{{ route('perfil.index') }}" class="nav-link">Perfil</a>
                     </li>
                     @if (Auth::user()->role === 'admin')
-                        <li class="nav-item">
-                            <a href="{{ url('/admin') }}" class="nav-link">Admin</a>
-                        </li>
+                       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Admin
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                              <li><a class="dropdown-item" href="{{route('servicios.create')}}">Crear servicio</a></li>
+                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                          </li>
+                  
                     @else
                         <li class="nav-item">
                             <a href="{{ url('/dashboard') }}" class="nav-link">Cliente</a>
