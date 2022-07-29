@@ -98,7 +98,8 @@ class ServicioController extends Controller
     public function edit($id)
     {
         $servicio = Servicio::findOrFail($id);
-        return view('servicios.update', compact('servicio'));
+        $especialidades = Especialidad::all();
+        return view('servicios.update', compact('servicio' , 'especialidades'));
     }
 
     /**
