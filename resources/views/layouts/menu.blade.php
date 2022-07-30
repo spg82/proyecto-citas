@@ -14,13 +14,14 @@
                     <a class="nav-link" href="{{route('servicios')}}">Servicios</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{route('empleados')}}">Empleados</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="contacto">Contacto</a>
                 </li>
 
                 @auth
-                    <li class="nav-item">
-                        <a href="{{ route('perfil.index') }}" class="nav-link">Perfil</a>
-                    </li>
+                   
                     @if (Auth::user()->role === 'admin')
                        
                         <li class="nav-item dropdown">
@@ -36,7 +37,7 @@
                   
                     @else
                         <li class="nav-item">
-                            <a href="{{ url('/dashboard') }}" class="nav-link">Cliente</a>
+                            <a href="{{ url('/dashboard') }}" class="nav-link">{{ucwords(Auth::user()->role)}}</a>
                         </li>
                     @endif
 
@@ -69,16 +70,18 @@
                                 {{ Auth::user()->name }}
 
                             </a>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu dropdown-menu-dark">
+                                
+                                <a href="{{ route('perfil.index') }}" class="dropdown-item">Perfil</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <x-dropdown-link :href="route('logout')"
+                                    <x-dropdown-link :href="route('logout')" 
                                         onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                         {{ __('Salir') }}
                                     </x-dropdown-link>
                                 </form>
-
+                                
                             </div>
                         </li>
                     @else

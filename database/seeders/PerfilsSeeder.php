@@ -33,7 +33,7 @@ class PerfilsSeeder extends Seeder
             'apellido1' => 'García',
             'apellido2' => 'Pérez',
             'telefono' => 655222112,
-            'imagen' => 'ana2.jpeg'
+            'imagen' => 'ana2.jpg'
 
         ]);
         DB::table('perfils')->insert([

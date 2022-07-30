@@ -50,5 +50,14 @@ Route::get('admin/servicios/editar/{id}',[ServicioController::class,'edit'])->na
 Route::post('admin/servicios/editar/{id}',[ServicioController::class,'update'])->name('servicios.update');
 Route::get('admin/servicios/eliminar/{id}',[ServicioController::class,'destroy'])->name('servicios.destroy');
 
+/**
+ * Rutas empleados
+ */
+
+Route::get('empleados', function(){
+    return view('empleados.index');
+})->name('empleados');
+
+
 
 require __DIR__.'/auth.php';

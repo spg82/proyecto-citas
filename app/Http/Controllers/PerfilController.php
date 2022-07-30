@@ -57,7 +57,7 @@ class PerfilController extends Controller
         $validado = $request->validate([
             'apellido1' => 'required|string|max:255',
             'apellido2' => 'required|string|max:255',
-            'telefono' => 'required|digits_between:9,9',
+            'telefono' => 'required|digits_between:9,9|unique:App\Models\Perfil,telefono',
             'imagen' => 'mimes:jpg,png,jpeg'
         ]);
 
