@@ -1,19 +1,12 @@
 @extends('layouts.plantilla')
 @section('title', 'Ver los servicios')
 @section('contenido')
-    @if (session('aviso') !== null && session('aviso') !== '')
-        <div class="alert alert-info mt-3">
-            <h2>
-                {{ session('aviso') }}
-                {{ session(['aviso' => '']) }}
-            </h2>
-        </div>
-    @endif
+   @include('layouts.partials.aviso')
     <h1 class="h3 mt-2 pt-2 mb-2 pb-2 text-center">Servicios de Peluquería</h1>
-    <div class="row">
+    <div class="row ">
         @foreach ($servicios as $servicio)
             @if ($servicio->especialidad->nombre === 'Peluquería')
-                <div class="card col-4 align-items-center   mb-3 mr-2" style=" ">
+                <div class="card col-4 mb-3">
                     <img src="{{ asset('img/servicios/' . $servicio->imagen) }}" class="card-img-top mt-2 rounded"
                         alt="Imagen de un {{ $servicio->nombre }}">
                     <div class="card-body">

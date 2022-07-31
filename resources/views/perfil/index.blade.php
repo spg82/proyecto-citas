@@ -1,17 +1,7 @@
 @extends('layouts.plantilla')
 @section('title', 'Ver perfil')
 @section('contenido')
-    <br>
-    <br>
-    @if (session('aviso') !== null && session('aviso') !== '')
-    <div class="alert alert-info">
-        <h1>
-            {{ session('aviso') }}
-            {{ session(['aviso' => '']) }}
-        </h1>
-    </div>
-        
-    @endif
+   @include('layouts.partials.aviso')
     @if (isset(Auth::user()->perfil))
         <table class="mx-auto">
             <tr>

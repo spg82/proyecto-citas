@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,9 +56,9 @@ Route::get('admin/servicios/eliminar/{id}',[ServicioController::class,'destroy']
  * Rutas empleados
  */
 
-Route::get('empleados', function(){
-    return view('empleados.index');
-})->name('empleados');
+Route::get('empleados', [EmpleadoController::class, 'index'])->name('empleados');
+Route::get('admin/empleados/{id}', [EmpleadoController::class, 'show'])->name('empleados.show');
+
 
 
 

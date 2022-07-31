@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Perfil;
+use App\Models\Empleado;
 
 class User extends Authenticatable
 {
@@ -51,5 +52,12 @@ class User extends Authenticatable
     public function perfil()
     {
         return $this->hasOne(Perfil::class);
+    }
+    /**
+     * 
+     */
+    public function empleado()
+    {
+        return $this->hasOne(Empleado::class);
     }
 }
