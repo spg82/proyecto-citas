@@ -57,8 +57,12 @@ Route::get('admin/servicios/eliminar/{id}',[ServicioController::class,'destroy']
  */
 
 Route::get('empleados', [EmpleadoController::class, 'index'])->name('empleados');
-Route::get('admin/empleados/{id}', [EmpleadoController::class, 'show'])->name('empleados.show');
-
+Route::get('empleado/{id}', [EmpleadoController::class, 'show'])->name('empleado.show');
+Route::get('empleado/create/{id}',[EmpleadoController::class, 'create'])->name('empleado.create');
+Route::post('empleado/create',[EmpleadoController::class, 'store'])->name('empleado.store');
+Route::get('empleados/editar/{id}',[EmpleadoController::class,'edit'])->name('empleado.edit');
+Route::post('empleado/editar/{id}',[EmpleadoController::class,'update'])->name('empleado.update');
+Route::get('empleado/eliminar/{id}',[EmpleadoController::class,'destroy'])->name('empleado.destroy');
 
 
 

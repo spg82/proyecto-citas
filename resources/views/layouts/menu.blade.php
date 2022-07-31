@@ -64,6 +64,9 @@
                             <div class="dropdown-menu dropdown-menu-dark">
                                 
                                 <a href="{{ route('perfil.index') }}" class="dropdown-item">Perfil</a>
+                                @if(Auth::user()->role === 'empleado')
+                                <a href="{{ route('empleado.show', ['id' => Auth::user()->id]) }}" class=" dropdown-item">Empleado</a>
+                                @endif
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <x-dropdown-link :href="route('logout')" 

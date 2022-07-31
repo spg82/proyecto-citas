@@ -20,4 +20,8 @@ class Especialidad extends Model
     {
         return $this->hasMany(Servicio::class);
     }
+    public function empleado()
+    {
+        return $this->hasMany(Empleado::class);
+    }
 }

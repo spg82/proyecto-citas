@@ -3,7 +3,7 @@
 @section('contenido')
    @include('layouts.partials.aviso')
     <h1 class="h3 mt-2 pt-2 mb-2 pb-2 text-center">Servicios de Peluquería</h1>
-    <div class="row ">
+    <div class="row justify-content-center g-2">
         @foreach ($servicios as $servicio)
             @if ($servicio->especialidad->nombre === 'Peluquería')
                 <div class="card col-4 mb-3">

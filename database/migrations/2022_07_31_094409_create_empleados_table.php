@@ -22,7 +22,8 @@ class CreateEmpleadosTable extends Migration
             $table->enum('calle',['calle','avenida','plaza']);
             $table->string('nombre');
             $table->integer('numero')->unsigned();
-            $table->string('letra',2);
+            $table->integer('piso')->unsigned();
+            $table->string('letra',2)->nullable(true);
             $table->integer('cp')->unsigned();
             $table->string('localidad');
             $table->timestamps();

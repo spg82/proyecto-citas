@@ -42,6 +42,11 @@
             </tr>
         </table>
     @else
-        <a href="{{ route('perfil.crear', ['id'=> $usuario->id]) }}" class="btn btn-success">Crear perfil</a>
+    <div class="row justify-content-center mt-3">
+        <div class="col-2">
+            <a href="{{ route('perfil.crear', ['id'=> $usuario->id]) }}" class="btn btn-success">Crear perfil</a>
+        </div>
+    </div>
+        
     @endif
 @endsection
