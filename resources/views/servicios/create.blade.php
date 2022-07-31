@@ -40,7 +40,7 @@
             <div class="mb-3">
                 <label for="form-label">Descripción</label>
                 <textarea class="form-control" placeholder="Describe el servicio a crear" id="descripcion" rows="5"
-                    name="descripción">{{ old('descripcion') }}</textarea>
+                    name="descripcion">{{ old('descripcion') }}</textarea>
             </div>
 
             <div class="mb-3">

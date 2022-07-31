@@ -41,7 +41,7 @@ class ServicioController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //dd($request);
         //limpiar errores
         $errors = [];
         //Validación todavía hay que hacer que funcione telefono min y max
@@ -49,7 +49,7 @@ class ServicioController extends Controller
            
             'especialidad_id' => 'required|in:1,2',
             'nombre' => 'required|string|max:255',
-            'descripción' => 'required|string|max:5000',
+            'descripcion' => 'required|string|max:5000',
             'duracion' => 'required|digits_between:2,2',
             'precio' => 'required|regex:/^[\d]{1,8}(\.[\d]{1,2})?$/',
             'imagen' => 'required|mimes:jpg,png,jpeg'
@@ -67,7 +67,7 @@ class ServicioController extends Controller
 
             $servicio->especialidad_id = $request->especialidad_id;
             $servicio->nombre = $request->nombre;
-            $servicio->descripción = $request->descripcion;
+            $servicio->descripcion = $request->descripcion;
             $servicio->duracion = $request->duracion;
             $servicio->precio = $request->precio;
             $servicio->save();
@@ -120,7 +120,7 @@ class ServicioController extends Controller
             
              'especialidad_id' => 'required|in:1,2',
              'nombre' => 'required|string|max:255',
-             'descripción' => 'required|string|max:5000',
+             'descripcion' => 'required|string|max:5000',
              'duracion' => 'required|digits_between:2,2',
              'precio' => 'required|regex:/^[\d]{1,8}(\.[\d]{1,2})?$/',
              'imagen' => 'mimes:jpg,png,jpeg'

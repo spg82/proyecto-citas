@@ -2,7 +2,7 @@
 @section('title', 'Ver los servicios')
 @section('contenido')
     @if (session('aviso') !== null && session('aviso') !== '')
-        <div class="alert alert-info">
+        <div class="alert alert-info mt-3">
             <h2>
                 {{ session('aviso') }}
                 {{ session(['aviso' => '']) }}
@@ -13,7 +13,7 @@
     <div class="row">
         @foreach ($servicios as $servicio)
             @if ($servicio->especialidad->nombre === 'Peluquería')
-                <div class="card col-4 align-items-center justify-content-center mx-auto" style=" ">
+                <div class="card col-4 align-items-center   mb-3 mr-2" style=" ">
                     <img src="{{ asset('img/servicios/' . $servicio->imagen) }}" class="card-img-top mt-2 rounded"
                         alt="Imagen de un {{ $servicio->nombre }}">
                     <div class="card-body">
@@ -40,7 +40,7 @@
     <div class="row">
         @foreach ($servicios as $servicio)
             @if ($servicio->especialidad->nombre === 'Estética')
-                <div class="card col-4 align-items-center justify-content-center mx-auto" style=" ">
+                <div class="card col-4 align-items-center mb-3 mr-2" style=" ">
                     <img src="{{ asset('img/servicios/' . $servicio->imagen) }}" class="card-img-top mt-2 rounded"
                         alt="Imagen de un {{ $servicio->nombre }}">
                     <div class="card-body">
